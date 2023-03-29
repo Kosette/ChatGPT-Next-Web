@@ -578,9 +578,9 @@ export function Home() {
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
       >
         <div className={styles["sidebar-header"]}>
-          <div className={styles["sidebar-title"]}>ChatGPT Next</div>
+          <div className={styles["sidebar-title"]}>HAL 2000</div>
           <div className={styles["sidebar-sub-title"]}>
-            Build your own AI assistant.
+            Time to Roll in Future.
           </div>
           <div className={styles["sidebar-logo"]}>
             <ChatGptIcon />

@@ -1,20 +1,15 @@
-FROM node:18-alpine AS base
-
-FROM base AS deps
+FROM node:lts-alpine AS deps
 
 RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
-COPY package.json yarn.lock* package-lock.json* ./
+COPY package.json yarn.lock* package-lock.json* /app
 
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+RUN yarn install && npm install
 
-FROM base AS builder
+
+FROM node:lts-alpine AS builder
 
 RUN apk update && apk add --no-cache git
 
@@ -23,21 +18,22 @@ ENV CODE=""
 ARG DOCKER=true
 
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/node_modules /app/node_modules
 COPY . .
 
 RUN yarn build
 
-FROM base AS runner
+
+FROM node:lts-alpine AS runner
 WORKDIR /app
 
 ENV OPENAI_API_KEY=""
 ENV CODE=""
 
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/.next/server ./.next/server
+COPY --from=builder /app/public /app/public
+COPY --from=builder /app/.next/standalone /app
+COPY --from=builder /app/.next/static /app/.next/static
+COPY --from=builder /app/.next/server /app/.next/server
 
 EXPOSE 3000
 

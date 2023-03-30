@@ -4,9 +4,9 @@ RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
-COPY package.json yarn.lock* package-lock.json* /app
+COPY package.json yarn.lock ./
 
-RUN yarn install && npm install
+RUN yarn install --production
 
 
 FROM node:lts-alpine AS builder

@@ -21,7 +21,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 COPY . .
 
-RUN yarn build
+RUN yarn build --prod
 
 
 FROM node:lts-alpine AS runner

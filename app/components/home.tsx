@@ -108,7 +108,7 @@ export function ChatList() {
       state.currentSessionIndex,
       state.selectSession,
       state.removeSession,
-    ]
+    ],
   );
 
   return (
@@ -132,9 +132,9 @@ function useSubmitHandler() {
   const config = useChatStore((state) => state.config);
   const submitKey = config.submitKey;
 
-  const shouldSubmit = (e: KeyboardEvent) => {
+  const shouldSubmit = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key !== "Enter") return false;
-
+    if (e.key === "Enter" && e.nativeEvent.isComposing) return false;
     return (
       (config.submitKey === SubmitKey.AltEnter && e.altKey) ||
       (config.submitKey === SubmitKey.CtrlEnter && e.ctrlKey) ||
@@ -202,7 +202,7 @@ export function Chat(props: {
       setPromptHints(promptStore.search(text));
     },
     100,
-    { leading: true, trailing: true }
+    { leading: true, trailing: true },
   );
 
   const onPromptSelect = (prompt: Prompt) => {
@@ -216,7 +216,7 @@ export function Chat(props: {
     if (!dom) return;
     const paddingBottomNum: number = parseInt(
       window.getComputedStyle(dom).paddingBottom,
-      10
+      10,
     );
     dom.scrollTop = dom.scrollHeight - dom.offsetHeight + paddingBottomNum;
   };
@@ -256,7 +256,7 @@ export function Chat(props: {
   };
 
   // check if should send message
-  const onInputKeyDown = (e: KeyboardEvent) => {
+  const onInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (shouldSubmit(e)) {
       onUserSubmit();
       e.preventDefault();
@@ -292,6 +292,8 @@ export function Chat(props: {
   const latestMessageRef = useRef<HTMLDivElement>(null);
   const [autoScroll, setAutoScroll] = useState(true);
 
+  const config = useChatStore((state) => state.config);
+
   // preview messages
   const messages = (session.messages as RenderMessage[])
     .concat(
@@ -304,20 +306,19 @@ export function Chat(props: {
               preview: true,
             },
           ]
-        : []
-    )
-    .concat(
-      userInput.length > 0
-        ? [
-            {
-              role: "user",
-              content: userInput,
-              date: new Date().toLocaleString(),
-              preview: true,
-            },
-          ]
-        : []
-    );
+        : [],
+    ).concat(
+        userInput.length > 0 && config.sendPreviewBubble
+          ? [
+              {
+                role: "user",
+                content: userInput,
+                date: new Date().toLocaleString(),
+                preview: false,
+              },
+            ]
+          : [],
+    ); 
 
   // auto scroll
   useLayoutEffect(() => {
@@ -354,7 +355,7 @@ export function Chat(props: {
               const newTopic = prompt(Locale.Chat.Rename, session.topic);
               if (newTopic && newTopic !== session.topic) {
                 chatStore.updateCurrentSession(
-                  (session) => (session.topic = newTopic!)
+                  (session) => (session.topic = newTopic!),
                 );
               }
             }}
@@ -488,7 +489,7 @@ export function Chat(props: {
             rows={4}
             onInput={(e) => onInput(e.currentTarget.value)}
             value={userInput}
-            onKeyDown={(e) => onInputKeyDown(e as any)}
+            onKeyDown={onInputKeyDown}
             onFocus={() => setAutoScroll(true)}
             onBlur={() => {
               setAutoScroll(false);
@@ -603,7 +604,7 @@ export function Home() {
       state.newSession,
       state.currentSessionIndex,
       state.removeSession,
-    ]
+    ],
   );
   const loading = !useHasHydrated();
   const [showSideBar, setShowSideBar] = useState(true);

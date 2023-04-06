@@ -1,4 +1,5 @@
 *.md
 .github
+.husky
 Dockerfile
 docs*

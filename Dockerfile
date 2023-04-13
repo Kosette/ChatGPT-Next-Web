@@ -15,7 +15,6 @@ RUN apk update && apk add --no-cache git
 
 ENV OPENAI_API_KEY=""
 ENV CODE=""
-ARG DOCKER=true
 
 WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
@@ -37,4 +36,4 @@ COPY --from=builder /app/.next/server /app/.next/server
 
 EXPOSE 3000
 
-CMD ["node","server.js"]
+ENTRYPOINT ["node","server.js"]

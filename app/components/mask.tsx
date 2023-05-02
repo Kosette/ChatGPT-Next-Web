@@ -291,14 +291,16 @@ export function MaskPage() {
               ))}
             </select>
 
-            <div className={styles["mask-create"]}>
-              <IconButton
-                icon={<AddIcon />}
-                text={Locale.Mask.Page.Create}
-                bordered
-                onClick={() => maskStore.create()}
-              />
-            </div>
+            <IconButton
+              className={styles["mask-create"]}
+              icon={<AddIcon />}
+              text={Locale.Mask.Page.Create}
+              bordered
+              onClick={() => {
+                const createdMask = maskStore.create();
+                setEditingMaskId(createdMask.id);
+              }}
+            />
           </div>
 
           <div>
@@ -368,6 +370,9 @@ export function MaskPage() {
                 text={Locale.Mask.EditModal.Download}
                 key="export"
                 bordered
+                onClick={() =>
+                  downloadAs(JSON.stringify(editingMask), "mask.json")
+                }
               />,
               <IconButton
                 key="copy"

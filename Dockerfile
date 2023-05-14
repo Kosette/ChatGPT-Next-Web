@@ -1,11 +1,11 @@
-FROM node:lts-alpine AS deps
+FROM node:current-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --production
 
 
-FROM node:lts-alpine AS builder
+FROM node:current-alpine AS builder
 RUN apk update && apk add --no-cache git
 ENV OPENAI_API_KEY=""
 ENV CODE=""
@@ -15,7 +15,7 @@ COPY . .
 RUN yarn build
 
 
-FROM node:lts-alpine AS runner
+FROM node:current-alpine AS runner
 WORKDIR /app
 ENV OPENAI_API_KEY=""
 ENV CODE=""

@@ -94,7 +94,7 @@ export class ChatGPTApi implements LLMApi {
             return finish();
           }
 
-          const chunk = decoder.decode(value);
+          const chunk = decoder.decode(value, { stream: true });
           const lines = chunk.split("data: ");
 
           for (const line of lines) {
@@ -103,11 +103,15 @@ export class ChatGPTApi implements LLMApi {
               return finish();
             }
             if (text.length === 0) continue;
-            const json = JSON.parse(text);
-            const delta = json.choices[0].delta.content;
-            if (delta) {
-              responseText += delta;
-              options.onUpdate?.(responseText, delta);
+            try {
+              const json = JSON.parse(text);
+              const delta = json.choices[0].delta.content;
+              if (delta) {
+                responseText += delta;
+                options.onUpdate?.(responseText, delta);
+              }
+            } catch (e) {
+              console.error("[Request] parse error", text, chunk);
             }
           }
         }

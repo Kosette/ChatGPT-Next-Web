@@ -118,10 +118,12 @@ export function SideBar(props: { className?: string }) {
         shouldNarrow && styles["narrow-sidebar"]
       }`}
     >
-      <div className={styles["sidebar-header"]}>
-        <div className={styles["sidebar-title"]}>HAL 2000</div>
+      <div className={styles["sidebar-header"]} data-tauri-drag-region>
+        <div className={styles["sidebar-title"]} data-tauri-drag-region>
+          HAL 2000
+        </div>
         <div className={styles["sidebar-sub-title"]}>
-          Fly me to the Moon.
+          Rolling Back to the Future.
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
           <ChatGptIcon />

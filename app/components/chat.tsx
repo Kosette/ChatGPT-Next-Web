@@ -922,7 +922,7 @@ export function Chat() {
                         }}
                       ></IconButton>
                     </div>
-                    {message.role === "user" ? (
+                    {isUser ? (
                       <Avatar avatar={config.avatar} />
                     ) : (
                       <MaskAvatar mask={session.mask} />
@@ -992,13 +992,15 @@ export function Chat() {
                             </>
                           )}
                         </div>
-
-                        <div className={styles["chat-message-action-date"]}>
-                          {message.date.toLocaleString()}
-                        </div>
                       </div>
                     )}
                   </div>
+
+                  {showActions && (
+                    <div className={styles["chat-message-action-date"]}>
+                      {message.date.toLocaleString()}
+                    </div>
+                  )}
                 </div>
               </div>
               {shouldShowClearContextDivider && <ClearContextDivider />}

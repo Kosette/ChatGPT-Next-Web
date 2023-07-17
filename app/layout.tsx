@@ -3,8 +3,9 @@ import "./styles/globals.scss";
 import "./styles/markdown.scss";
 import "./styles/highlight.scss";
 import { getClientConfig } from "./config/client";
+import { type Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "HAL 2000",
   description: "Fly me to the Moon",
   viewport: {

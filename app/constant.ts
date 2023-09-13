@@ -18,6 +18,10 @@ export enum Path {
   Auth = "/auth",
 }
 
+export enum ApiPath {
+  Cors = "/api/cors",
+}
+
 export enum SlotID {
   AppBody = "app-body",
 }
@@ -44,6 +48,9 @@ export const NARROW_SIDEBAR_WIDTH = 100;
 export const ACCESS_CODE_PREFIX = "nk-";
 
 export const LAST_INPUT_KEY = "last-input";
+export const UNFINISHED_INPUT = (id: string) => "unfinished-input-" + id;
+
+export const STORAGE_KEY = "chatgpt-next-web";
 
 export const REQUEST_TIMEOUT_MS = 60000;
 

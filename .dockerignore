@@ -3,7 +3,8 @@
 *.md
 .env
 .env*.local
-.github
+.git*
 .husky
 Dockerfile
 docs*
+src-tauri

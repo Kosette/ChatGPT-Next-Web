@@ -7,4 +7,3 @@
 .husky
 Dockerfile
 docs*
-src-tauri

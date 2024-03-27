@@ -7,3 +7,4 @@
 .husky
 Dockerfile
 docs*
+docker-compose.yml

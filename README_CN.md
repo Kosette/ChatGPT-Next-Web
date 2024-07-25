@@ -10,13 +10,14 @@
 
 [企业版](#%E4%BC%81%E4%B8%9A%E7%89%88) /[演示 Demo](https://chat-gpt-next-web.vercel.app/) / [反馈 Issues](https://github.com/Yidadaa/ChatGPT-Next-Web/issues) / [加入 Discord](https://discord.gg/zrhvHCr79N)
 
-[<img src="https://vercel.com/button" alt="Deploy on Zeabur" height="30">](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FChatGPTNextWeb%2FChatGPT-Next-Web&env=OPENAI_API_KEY&env=CODE&project-name=nextchat&repository-name=NextChat) [<img src="https://zeabur.com/button.svg" alt="Deploy on Zeabur" height="30">](https://zeabur.com/templates/ZBUEFA)  [<img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod" height="30">](https://gitpod.io/#https://github.com/Yidadaa/ChatGPT-Next-Web)
+[<img src="https://vercel.com/button" alt="Deploy on Zeabur" height="30">](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FChatGPTNextWeb%2FChatGPT-Next-Web&env=OPENAI_API_KEY&env=CODE&project-name=nextchat&repository-name=NextChat) [<img src="https://zeabur.com/button.svg" alt="Deploy on Zeabur" height="30">](https://zeabur.com/templates/ZBUEFA) [<img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod" height="30">](https://gitpod.io/#https://github.com/Yidadaa/ChatGPT-Next-Web)
 
 </div>
 
 ## 企业版
 
 满足您公司私有化部署和定制需求
+
 - **品牌定制**：企业量身定制 VI/UI，与企业品牌形象无缝契合
 - **资源集成**：由企业管理人员统一配置和管理数十种 AI 资源，团队成员开箱即用
 - **权限管理**：成员权限、资源权限、知识库权限层级分明，企业级 Admin Panel 统一控制
@@ -191,8 +192,9 @@ ByteDance Api Url.
 ### `WHITE_WEBDEV_ENDPOINTS` (可选)
 
 如果你想增加允许访问的webdav服务地址，可以使用该选项，格式要求：
+
 - 每一个地址必须是一个完整的 endpoint
-> `https://xxxx/xxx`
+  > `https://xxxx/xxx`
 - 多个地址以`,`相连
 
 ### `CUSTOM_MODELS` （可选）
@@ -203,12 +205,13 @@ ByteDance Api Url.
 用来控制模型列表，使用 `+` 增加一个模型，使用 `-` 来隐藏一个模型，使用 `模型名=展示名` 来自定义模型的展示名，用英文逗号隔开。
 
 在Azure的模式下，支持使用`modelName@azure=deploymentName`的方式配置模型名称和部署名称(deploy-name)
+
 > 示例：`+gpt-3.5-turbo@azure=gpt35`这个配置会在模型列表显示一个`gpt35(Azure)`的选项。
 > 如果你只能使用Azure模式，那么设置 `-all,+gpt-3.5-turbo@azure=gpt35` 则可以让对话的默认使用 `gpt35(Azure)`
 
 在ByteDance的模式下，支持使用`modelName@bytedance=deploymentName`的方式配置模型名称和部署名称(deploy-name)
-> 示例: `+Doubao-lite-4k@bytedance=ep-xxxxx-xxx`这个配置会在模型列表显示一个`Doubao-lite-4k(ByteDance)`的选项
 
+> 示例: `+Doubao-lite-4k@bytedance=ep-xxxxx-xxx`这个配置会在模型列表显示一个`Doubao-lite-4k(ByteDance)`的选项
 
 ### `DEFAULT_MODEL` （可选）
 
@@ -217,6 +220,14 @@ ByteDance Api Url.
 ### `DEFAULT_INPUT_TEMPLATE` （可选）
 
 自定义默认的 template，用于初始化『设置』中的『用户输入预处理』配置项
+
+### `STABILITY_API_KEY` (optional)
+
+Stability API密钥
+
+### `STABILITY_URL` (optional)
+
+自定义的Stability API请求地址
 
 ## 开发
 

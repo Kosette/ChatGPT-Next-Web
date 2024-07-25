@@ -28,13 +28,14 @@ One-Click to get a well-designed cross-platform ChatGPT web UI, with GPT3, GPT4 
 [MacOS-image]: https://img.shields.io/badge/-MacOS-black?logo=apple
 [Linux-image]: https://img.shields.io/badge/-Linux-333?logo=ubuntu
 
-[<img src="https://vercel.com/button" alt="Deploy on Zeabur" height="30">](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FChatGPTNextWeb%2FChatGPT-Next-Web&env=OPENAI_API_KEY&env=CODE&project-name=nextchat&repository-name=NextChat) [<img src="https://zeabur.com/button.svg" alt="Deploy on Zeabur" height="30">](https://zeabur.com/templates/ZBUEFA)  [<img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod" height="30">](https://gitpod.io/#https://github.com/Yidadaa/ChatGPT-Next-Web)
+[<img src="https://vercel.com/button" alt="Deploy on Zeabur" height="30">](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FChatGPTNextWeb%2FChatGPT-Next-Web&env=OPENAI_API_KEY&env=CODE&project-name=nextchat&repository-name=NextChat) [<img src="https://zeabur.com/button.svg" alt="Deploy on Zeabur" height="30">](https://zeabur.com/templates/ZBUEFA) [<img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod" height="30">](https://gitpod.io/#https://github.com/Yidadaa/ChatGPT-Next-Web)
 
 </div>
 
 ## Enterprise Edition
 
 Meeting Your Company's Privatization and Customization Deployment Requirements:
+
 - **Brand Customization**: Tailored VI/UI to seamlessly align with your corporate brand image.
 - **Resource Integration**: Unified configuration and management of dozens of AI resources by company administrators, ready for use by team members.
 - **Permission Control**: Clearly defined member permissions, resource permissions, and knowledge base permissions, all controlled via a corporate-grade Admin Panel.
@@ -48,6 +49,7 @@ For enterprise inquiries, please contact: **business@nextchat.dev**
 ## 企业版
 
 满足企业用户私有化部署和个性化定制需求：
+
 - **品牌定制**：企业量身定制 VI/UI，与企业品牌形象无缝契合
 - **资源集成**：由企业管理人员统一配置和管理数十种 AI 资源，团队成员开箱即用
 - **权限管理**：成员权限、资源权限、知识库权限层级分明，企业级 Admin Panel 统一控制
@@ -305,10 +307,12 @@ To control custom models, use `+` to add a custom model, use `-` to hide a model
 User `-all` to disable all default models, `+all` to enable all default models.
 
 For Azure: use `modelName@azure=deploymentName` to customize model name and deployment name.
+
 > Example: `+gpt-3.5-turbo@azure=gpt35` will show option `gpt35(Azure)` in model list.
 > If you only can use Azure model, `-all,+gpt-3.5-turbo@azure=gpt35` will `gpt35(Azure)` the only option in model list.
 
 For ByteDance: use `modelName@bytedance=deploymentName` to customize model name and deployment name.
+
 > Example: `+Doubao-lite-4k@bytedance=ep-xxxxx-xxx` will show option `Doubao-lite-4k(ByteDance)` in model list.
 
 ### `DEFAULT_MODEL` （optional）
@@ -318,13 +322,22 @@ Change default model
 ### `WHITE_WEBDEV_ENDPOINTS` (optional)
 
 You can use this option if you want to increase the number of webdav service addresses you are allowed to access, as required by the format：
-- Each address must be a complete endpoint 
-> `https://xxxx/yyy`
+
+- Each address must be a complete endpoint
+  > `https://xxxx/yyy`
 - Multiple addresses are connected by ', '
 
 ### `DEFAULT_INPUT_TEMPLATE` (optional)
 
 Customize the default template used to initialize the User Input Preprocessing configuration item in Settings.
+
+### `STABILITY_API_KEY` (optional)
+
+Stability API key.
+
+### `STABILITY_URL` (optional)
+
+Customize Stability API url.
 
 ## Requirements
 

@@ -276,7 +276,7 @@ export function RenderExport(props: {
       return {
         id: i.toString(),
         role: role as any,
-        content: role === "user" ? v.textContent ?? "" : v.innerHTML,
+        content: role === "user" ? (v.textContent ?? "") : v.innerHTML,
         date: "",
       };
     });
@@ -540,9 +540,7 @@ export function ImagePreviewer(props: {
 
           <div>
             <div className={styles["main-title"]}>HAL 2000</div>
-            <div className={styles["sub-title"]}>
-              Fly me to the Moon.
-            </div>
+            <div className={styles["sub-title"]}>Fly me to the Moon.</div>
             <div className={styles["icons"]}>
               <ExportAvatar avatar={config.avatar} />
               <span className={styles["icon-space"]}>&</span>

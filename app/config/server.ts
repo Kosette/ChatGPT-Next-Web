@@ -37,7 +37,7 @@ declare global {
       GOOGLE_URL?: string;
 
       // google tag manager
-      GTM_ID?: string;
+      // GTM_ID?: string;
 
       // anthropic only
       ANTHROPIC_URL?: string;
@@ -119,10 +119,16 @@ export const getServerSideConfig = () => {
 
   if (disableGPT4) {
     if (customModels) customModels += ",";
-    customModels += DEFAULT_MODELS.filter((m) => m.name.startsWith("gpt-4"))
+    customModels += DEFAULT_MODELS.filter(
+      (m) => m.name.startsWith("gpt-4") && !m.name.startsWith("gpt-4o-mini"),
+    )
       .map((m) => "-" + m.name)
       .join(",");
-    if (defaultModel.startsWith("gpt-4")) defaultModel = "";
+    if (
+      defaultModel.startsWith("gpt-4") &&
+      !defaultModel.startsWith("gpt-4o-mini")
+    )
+      defaultModel = "";
   }
 
   const isStability = !!process.env.STABILITY_API_KEY;
@@ -204,7 +210,8 @@ export const getServerSideConfig = () => {
     cloudflareKVApiKey: getApiKey(process.env.CLOUDFLARE_KV_API_KEY),
     cloudflareKVTTL: process.env.CLOUDFLARE_KV_TTL,
 
-    gtmId: process.env.GTM_ID,
+    // gtmId: process.env.GTM_ID,
+    // gaId: process.env.GA_ID || DEFAULT_GA_ID,
 
     needCode: ACCESS_CODES.size > 0,
     code: process.env.CODE,

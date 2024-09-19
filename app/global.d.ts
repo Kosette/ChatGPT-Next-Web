@@ -34,3 +34,8 @@ declare interface Window {
     };
   };
 }
+
+interface Window {
+  webkitAudioContext: typeof AudioContext;
+  _SW_ENABLED?: boolean;
+}

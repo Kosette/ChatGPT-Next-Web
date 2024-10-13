@@ -69,7 +69,7 @@ export function Mermaid(props: { code: string }) {
   );
 }
 
-export function PreCode(props: { children: any }) {
+export function PreCode(props: { children?: any }) {
   const ref = useRef<HTMLPreElement>(null);
   const previewRef = useRef<HTMLPreviewHander>(null);
   const [mermaidCode, setMermaidCode] = useState("");
@@ -122,7 +122,7 @@ export function PreCode(props: { children: any }) {
       });
       setTimeout(renderArtifacts, 1);
     }
-  }, []);
+  }, [renderArtifacts]);
 
   return (
     <>
@@ -167,7 +167,7 @@ export function PreCode(props: { children: any }) {
   );
 }
 
-function CustomCode(props: { children: any; className?: string }) {
+function CustomCode(props: { children?: any; className?: string }) {
   const chatStore = useChatStore();
   const session = chatStore.currentSession();
   const config = useAppConfig();
@@ -192,7 +192,9 @@ function CustomCode(props: { children: any; className?: string }) {
   const renderShowMoreButton = () => {
     if (showToggle && enableCodeFold && collapsed) {
       return (
-        <div className={`show-hide-button ${collapsed ? "collapsed" : "expanded"}`}>
+        <div
+          className={`show-hide-button ${collapsed ? "collapsed" : "expanded"}`}
+        >
           <button onClick={toggleCollapsed}>{Locale.NewChat.More}</button>
         </div>
       );
@@ -252,7 +254,7 @@ function tryWrapHtmlCode(text: string) {
     );
 }
 
-function _MarkDownContent(props: { content: string }) {
+function MarkDownContentA(props: { content: string }) {
   const escapedContent = useMemo(() => {
     return tryWrapHtmlCode(escapeBrackets(props.content));
   }, [props.content]);
@@ -291,7 +293,7 @@ function _MarkDownContent(props: { content: string }) {
             );
           }
           const isInternal = /^\/#/i.test(href);
-          const target = isInternal ? "_self" : aProps.target ?? "_blank";
+          const target = isInternal ? "_self" : (aProps.target ?? "_blank");
           return <a {...aProps} target={target} />;
         },
       }}
@@ -301,7 +303,7 @@ function _MarkDownContent(props: { content: string }) {
   );
 }
 
-export const MarkdownContent = React.memo(_MarkDownContent);
+export const MarkdownContent = React.memo(MarkDownContentA);
 
 export function Markdown(
   props: {

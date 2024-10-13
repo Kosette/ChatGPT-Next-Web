@@ -10,14 +10,10 @@ import BotIcon from "../icons/bot.svg";
 import { useEffect } from "react";
 import { getClientConfig } from "../config/client";
 import { PasswordInput } from "./ui-lib";
-import LeftIcon from "@/app/icons/left.svg";
-import { safeLocalStorage } from "@/app/utils";
-const storage = safeLocalStorage();
 
 export function AuthPage() {
   const navigate = useNavigate();
   const accessStore = useAccessStore();
-
   const goHome = () => navigate(Path.Home);
   const goChat = () => navigate(Path.Chat);
   const resetAccessCode = () => {

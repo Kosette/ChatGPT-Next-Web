@@ -1607,7 +1607,7 @@ function ChatWindow() {
               title={Locale.Chat.Actions.RefreshTitle}
               onClick={() => {
                 showToast(Locale.Chat.Actions.RefreshToast);
-                chatStore.summarizeSession(true);
+                chatStore.summarizeSession(true, session);
               }}
             />
           </div>

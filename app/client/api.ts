@@ -21,6 +21,7 @@ import { HunyuanApi } from "./platforms/tencent";
 import { MoonshotApi } from "./platforms/moonshot";
 import { SparkApi } from "./platforms/iflytek";
 import { XAIApi } from "./platforms/xai";
+import { ChatGLMApi } from "./platforms/glm";
 
 export const ROLES = ["system", "user", "assistant"] as const;
 export type MessageRole = (typeof ROLES)[number];
@@ -69,7 +70,7 @@ export interface ChatOptions {
   config: LLMConfig;
 
   onUpdate?: (message: string, chunk: string) => void;
-  onFinish: (message: string) => void;
+  onFinish: (message: string, responseRes: Response) => void;
   onError?: (err: Error) => void;
   onController?: (controller: AbortController) => void;
   onBeforeTool?: (tool: ChatMessageTool) => void;
@@ -156,6 +157,9 @@ export class ClientApi {
       case ModelProvider.XAI:
         this.llm = new XAIApi();
         break;
+      case ModelProvider.ChatGLM:
+        this.llm = new ChatGLMApi();
+        break;
       default:
         this.llm = new ChatGPTApi();
     }
@@ -176,8 +180,7 @@ export class ClientApi {
       .concat([
         {
           from: "human",
-          value:
-            "Share from HAL 2000",
+          value: "Share from HAL 2000",
         },
       ]);
     // 敬告二开开发者们，为了开源大模型的发展，请不要修改上述消息，此消息用于后续数据清洗使用
@@ -244,26 +247,32 @@ export function getHeaders(ignoreHeaders: boolean = false) {
     const isMoonshot = modelConfig.providerName === ServiceProvider.Moonshot;
     const isIflytek = modelConfig.providerName === ServiceProvider.Iflytek;
     const isXAI = modelConfig.providerName === ServiceProvider.XAI;
+    const isChatGLM = modelConfig.providerName === ServiceProvider.ChatGLM;
     const isEnabledAccessControl = accessStore.enabledAccessControl();
     const apiKey = isGoogle
       ? accessStore.googleApiKey
       : isAzure
-      ? accessStore.azureApiKey
-      : isAnthropic
-      ? accessStore.anthropicApiKey
-      : isByteDance
-      ? accessStore.bytedanceApiKey
-      : isAlibaba
-      ? accessStore.alibabaApiKey
-      : isMoonshot
-      ? accessStore.moonshotApiKey
-      : isXAI
-      ? accessStore.xaiApiKey
-      : isIflytek
-      ? accessStore.iflytekApiKey && accessStore.iflytekApiSecret
-        ? accessStore.iflytekApiKey + ":" + accessStore.iflytekApiSecret
-        : ""
-      : accessStore.openaiApiKey;
+        ? accessStore.azureApiKey
+        : isAnthropic
+          ? accessStore.anthropicApiKey
+          : isByteDance
+            ? accessStore.bytedanceApiKey
+            : isAlibaba
+              ? accessStore.alibabaApiKey
+              : isMoonshot
+                ? accessStore.moonshotApiKey
+                : isXAI
+                  ? accessStore.xaiApiKey
+                  : isChatGLM
+                    ? accessStore.chatglmApiKey
+                    : isIflytek
+                      ? accessStore.iflytekApiKey &&
+                        accessStore.iflytekApiSecret
+                        ? accessStore.iflytekApiKey +
+                          ":" +
+                          accessStore.iflytekApiSecret
+                        : ""
+                      : accessStore.openaiApiKey;
     return {
       isGoogle,
       isAzure,
@@ -274,6 +283,7 @@ export function getHeaders(ignoreHeaders: boolean = false) {
       isMoonshot,
       isIflytek,
       isXAI,
+      isChatGLM,
       apiKey,
       isEnabledAccessControl,
     };
@@ -283,10 +293,10 @@ export function getHeaders(ignoreHeaders: boolean = false) {
     return isAzure
       ? "api-key"
       : isAnthropic
-      ? "x-api-key"
-      : isGoogle
-      ? "x-goog-api-key"
-      : "Authorization";
+        ? "x-api-key"
+        : isGoogle
+          ? "x-goog-api-key"
+          : "Authorization";
   }
 
   const {
@@ -338,6 +348,8 @@ export function getClientApi(provider: ServiceProvider): ClientApi {
       return new ClientApi(ModelProvider.Iflytek);
     case ServiceProvider.XAI:
       return new ClientApi(ModelProvider.XAI);
+    case ServiceProvider.ChatGLM:
+      return new ClientApi(ModelProvider.ChatGLM);
     default:
       return new ClientApi(ModelProvider.GPT);
   }

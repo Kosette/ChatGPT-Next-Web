@@ -24,6 +24,7 @@
     "@hello-pangea/dnd": "^17.0.0",
     "@svgr/webpack": "^6.5.1",
     "axios": "^1.7.7",
+    "clsx": "^2.1.1",
     "emoji-picker-react": "^4.12.0",
     "fuse.js": "^7.0.0",
     "heic2any": "^0.0.4",
@@ -46,11 +47,11 @@
     "remark-breaks": "^4.0.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
+    "rt-client": "https://github.com/Azure-Samples/aoai-realtime-audio-sdk/releases/download/js/v0.5.0/rt-client-0.5.0.tgz",
     "sass": "^1.79.5",
     "spark-md5": "^3.0.2",
     "use-debounce": "^10.0.3",
-    "yaml": "^2.6.0",
-    "zustand": "^4.5.5"
+    "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@tauri-apps/api": "^2.0.2",

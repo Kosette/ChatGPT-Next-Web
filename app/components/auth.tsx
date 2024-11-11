@@ -10,6 +10,10 @@ import BotIcon from "../icons/bot.svg";
 import { useEffect } from "react";
 import { getClientConfig } from "../config/client";
 import { PasswordInput } from "./ui-lib";
+import { safeLocalStorage } from "@/app/utils";
+import clsx from "clsx";
+
+const storage = safeLocalStorage();
 
 export function AuthPage() {
   const navigate = useNavigate();
@@ -32,7 +36,7 @@ export function AuthPage() {
 
   return (
     <div className={styles["auth-page"]}>
-      <div className={`no-dark ${styles["auth-logo"]}`}>
+      <div className={clsx("no-dark", styles["auth-logo"])}>
         <BotIcon />
       </div>
 

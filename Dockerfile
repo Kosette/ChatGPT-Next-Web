@@ -1,11 +1,11 @@
-FROM node:18-alpine AS deps
+FROM node:22-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install
 
 
-FROM node:18-alpine AS builder
+FROM node:22-alpine AS builder
 RUN apk update && apk add --no-cache git
 ENV OPENAI_API_KEY=""
 ENV GOOGLE_API_KEY=""
@@ -16,7 +16,7 @@ COPY . .
 RUN yarn build
 
 
-FROM node:18-alpine AS runner
+FROM node:22-alpine AS runner
 WORKDIR /app
 ENV OPENAI_API_KEY=""
 ENV GOOGLE_API_KEY=""

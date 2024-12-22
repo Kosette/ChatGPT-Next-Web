@@ -16,9 +16,10 @@ global.fetch = jest.fn(() =>
     },
     body: null,
     bodyUsed: false,
+    bytes: () => Promise.resolve(new Uint8Array()),
     arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
     blob: () => Promise.resolve(new Blob()),
     formData: () => Promise.resolve(new FormData()),
     text: () => Promise.resolve(""),
-  }),
+  } as Response),
 );

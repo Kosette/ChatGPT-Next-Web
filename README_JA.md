@@ -11,6 +11,14 @@
 
 </div>
 
+## Sponsor AI API
+
+<a href='https://302.ai/'>
+  <img src="https://github.com/user-attachments/assets/6cf24233-1010-43e0-9a83-a11159866175" width="100%" alt="icon"/>
+</a>
+
+[302.AI](https://302.ai/) は、オンデマンドで支払うAIアプリケーションプラットフォームで、最も安全なAI APIとAIオンラインアプリケーションを提供します。
+
 ## 企業版
 
 あなたの会社のプライベートデプロイとカスタマイズのニーズに応える
@@ -202,6 +210,7 @@ ByteDance API の URL。
 モデルリストを管理します。`+` でモデルを追加し、`-` でモデルを非表示にし、`モデル名=表示名` でモデルの表示名をカスタマイズし、カンマで区切ります。
 
 Azure モードでは、`modelName@Azure=deploymentName` 形式でモデル名とデプロイ名（deploy-name）を設定できます。
+
 > 例：`+gpt-3.5-turbo@Azure=gpt35` この設定でモデルリストに `gpt35(Azure)` のオプションが表示されます。
 
 ByteDance モードでは、`modelName@bytedance=deploymentName` 形式でモデル名とデプロイ名（deploy-name）を設定できます。
@@ -222,6 +231,14 @@ ByteDance モードでは、`modelName@bytedance=deploymentName` 形式でモデ
 ### `DEFAULT_INPUT_TEMPLATE` （オプション）
 
 『設定』の『ユーザー入力前処理』の初期設定に使用するテンプレートをカスタマイズします。
+
+### `AI302_API_KEY` （オプション）
+
+302.AI API キー.
+
+### `AI302_URL` （オプション）
+
+302.AI API の URL.
 
 ## 開発
 

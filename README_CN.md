@@ -14,6 +14,14 @@
 
 </div>
 
+## Sponsor AI API
+
+<a href='https://302.ai/'>
+  <img src="https://github.com/user-attachments/assets/d8c0c513-1e18-4d3b-a2a9-ff3696aec0d4" width="100%" alt="icon"/>
+</a>
+
+[302.AI](https://302.ai/) 是一个按需付费的AI应用平台，提供市面上最全的AI API和AI在线应用。
+
 ## 企业版
 
 满足您公司私有化部署和定制需求
@@ -275,6 +283,14 @@ SiliconFlow API Key.
 ### `SILICONFLOW_URL` (optional)
 
 SiliconFlow API URL.
+
+### `AI302_API_KEY` (optional)
+
+302.AI API Key.
+
+### `AI302_URL` (optional)
+
+302.AI API URL.
 
 ## 开发
 

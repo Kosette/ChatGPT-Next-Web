@@ -2,7 +2,7 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import { MCPClientLogger } from "./logger";
 import { ListToolsResponse, McpRequestMessage, ServerConfig } from "./types";
-import { z } from "zod";
+import { CompatibilityCallToolResultSchema } from "@modelcontextprotocol/sdk/types.js";
 
 const logger = new MCPClientLogger();
 
@@ -51,5 +51,5 @@ export async function executeRequest(
   client: Client,
   request: McpRequestMessage,
 ) {
-  return client.request(request, z.any());
+  return client.request(request, CompatibilityCallToolResultSchema);
 }

@@ -52,3 +52,6 @@ app/mcp/mcp_config.json
 
 # package-lock (using yarn)
 package-lock.json
+
+# mise.toml
+mise.toml
